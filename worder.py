@@ -1,5 +1,9 @@
 from faster_whisper import WhisperModel 
+from pathlib        import Path
+
 import time
+import sys
+import argparse as ap
 
 ### Functions ### 
 
@@ -21,6 +25,36 @@ def write_srt(segments, path):
 
 ### Functions ### 
 
+# Parse the CLI arguments 
+
+video_path  = ""
+output_path = ""
+
+parser = ap.ArgumentParser(prog="worder", 
+                           description="Generate subtitles from videos", 
+                           usage="%(prog)s \"path/to/video.mp4\"")
+parser.add_argument("path", type=str, help="The path to the video")
+
+# Use the arguments 
+args = parser.parse_args()
+
+# Make sure that there are actually arguments
+
+if len(sys.argv) == 1:
+    parser.print_help()
+    exit(-1)
+
+# Check for the other arguments
+
+if not args.path:
+    print("[ERROR]: Invalid path!")
+    exit(-1)
+
+# Use the given path 
+
+video_path  = args.path 
+output_path = str(Path(video_path).with_suffix(".srt"))
+
 # Create the model 
 
 start = time.perf_counter()
@@ -32,14 +66,13 @@ print("[INFO]: Successfully created the model...\n")
 # Transcribe the file 
 
 print("\n[INFO]: Transcribing the video...")
-video_path     = "assets/video.mp4" # @TODO
 segments, info = model.transcribe(video_path)
 print("[INFO]: Finished transcribing the video...\n")
 
 # Create the SRT file
 
 print("\n[INFO]: Writing the SRT file...")
-write_srt(segments, "assets/video.srt")
+write_srt(segments, output_path)
 print("[INFO]: Successfully created the SRT file!\n")
 
 # Print useful info
