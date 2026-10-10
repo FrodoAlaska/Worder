@@ -66,7 +66,7 @@ print("[INFO]: Successfully created the model...\n")
 # Transcribe the file 
 
 print("\n[INFO]: Transcribing the video...")
-segments, info = model.transcribe(video_path)
+segments, info = model.transcribe(video_path, task="translate")
 print("[INFO]: Finished transcribing the video...\n")
 
 # Create the SRT file

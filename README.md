@@ -1,4 +1,4 @@
-Generate a subtitle file (SRT) for any video 
+Generate a subtitle file (SRT) for any video. Worder can transcribe any video and translate English-only subtitles, using the [fast-whisper](https://github.com/SYSTRAN/faster-whisper) library.
 
 ## Requirements
 
