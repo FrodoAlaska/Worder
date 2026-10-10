@@ -1,0 +1,1 @@
+from .worder import main
