@@ -13,7 +13,7 @@ pip install fast-whisper
 First, you need to install Worder to get started: 
 
 ```
-pip install worder
+pip install Worder
 ```
 
 After successfully installing worder, you can use it as such: 
